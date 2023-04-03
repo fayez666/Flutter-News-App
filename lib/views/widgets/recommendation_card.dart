@@ -1,14 +1,13 @@
+import 'package:challenge_flutter/models/news_items.dart';
 import 'package:flutter/material.dart';
 
 class RecommendationCard extends StatelessWidget {
   const RecommendationCard({
     super.key,
-    required this.items,
-    required this.index,
+    required this.newsItem,
   });
 
-  final List<String> items;
-  final int index;
+  final NewsItem newsItem;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class RecommendationCard extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(12.0),
           child: Image.network(
-            items[index],
+            newsItem.imgUrl,
             fit: BoxFit.cover,
             height: 100,
             width: 100,
@@ -30,16 +29,16 @@ class RecommendationCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                "Sports",
-                style: TextStyle(color: Colors.grey),
+              Text(
+                newsItem.category,
+                style: const TextStyle(color: Colors.grey),
               ),
               const SizedBox(
                 height: 10,
               ),
-              const Text(
-                "What training Do Volley ball Players Need?",
-                style: TextStyle(fontWeight: FontWeight.bold),
+              Text(
+                newsItem.title,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(
                 height: 10,
@@ -49,29 +48,31 @@ class RecommendationCard extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 15,
-                    backgroundImage: NetworkImage(items[3]),
+                    backgroundImage: NetworkImage(newsItem.imgUrl),
                   ),
                   const SizedBox(
-                    width: 5,
+                    width: 3,
+                  ),
+                  Text(
+                    newsItem.author,
+                    style: const TextStyle(color: Colors.grey),
+                  ),
+                  const SizedBox(
+                    width: 0,
                   ),
                   const Text(
-                    "Mckindney",
+                    "•",
                     style: TextStyle(color: Colors.grey),
                   ),
                   const SizedBox(
-                    width: 5,
+                    width: 0,
                   ),
-                  const CircleAvatar(
-                    radius: 3,
-                    backgroundColor: Colors.grey,
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  const Expanded(
+                  Expanded(
                     child: Text(
-                      "Feb 27, 2023",
-                      style: TextStyle(color: Colors.grey),
+                      newsItem.time,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(color: Colors.grey),
                     ),
                   ),
                 ],
