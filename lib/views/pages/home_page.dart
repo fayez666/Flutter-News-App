@@ -1,3 +1,4 @@
+import 'package:challenge_flutter/views/pages/details_page.dart';
 import 'package:challenge_flutter/views/widgets/recommendation_card.dart';
 import 'package:challenge_flutter/models/news_items.dart';
 import 'package:challenge_flutter/views/widgets/app_bar_icon.dart';
@@ -21,17 +22,26 @@ class HomePage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const AppBarIcon(icon: Icons.menu),
+                  AppBarIcon(
+                    icon: Icons.menu,
+                    press: () {},
+                  ),
                   Row(
                     children: [
-                      const AppBarIcon(icon: Icons.search),
+                      AppBarIcon(
+                        icon: Icons.search,
+                        press: () {},
+                      ),
                       const SizedBox(
                         width: 5.9,
                       ),
                       Stack(
-                        children: const [
-                          AppBarIcon(icon: Icons.notifications_outlined),
-                          Positioned(
+                        children: [
+                          AppBarIcon(
+                            icon: Icons.notifications_outlined,
+                            press: () {},
+                          ),
+                          const Positioned(
                             right: 1.5,
                             top: 1.5,
                             child: Text(
@@ -63,10 +73,19 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 8.0,
               ),
-              ...news.map((e) => Padding(
+              ...news.map((item) => Padding(
                     padding: const EdgeInsets.only(bottom: 15.0),
-                    child: RecommendationCard(
-                      newsItem: e,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return DetailsPage(item: item);
+                          },
+                        ));
+                      },
+                      child: RecommendationCard(
+                        newsItem: item,
+                      ),
                     ),
                   ))
             ],
